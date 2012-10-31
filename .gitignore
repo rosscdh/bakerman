@@ -1,0 +1,12 @@
+
+*.pyc
+.AppleDouble
+*.db
+:2e_*
+._*
+.DS_Store
+local_settings.py
+build/*
+media/*
+log/*
+static/*
