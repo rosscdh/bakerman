@@ -1,0 +1,7 @@
+<script id="page_language_urls">
+language_page_urls = {
+{% for lang in language_list %}
+'{{ lang.short_lang }}': '/{{ lang.short_lang }}{{ lang.url }}'{% if not forloop.last %},{% endif %}
+{% endfor %}
+}
+</script>
