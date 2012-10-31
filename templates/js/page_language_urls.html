@@ -1,7 +1,35 @@
 <script id="page_language_urls">
-language_page_urls = {
-{% for lang in language_list %}
-'{{ lang.short_lang }}': '/{{ lang.short_lang }}{{ lang.url }}'{% if not forloop.last %},{% endif %}
-{% endfor %}
+var LanguageRedirect = function() {
+    var self = this;
+    self.language_page_urls = {
+    {% for lang in language_list %}
+    '{{ lang.short_lang }}': '/{{ lang.short_lang }}{{ lang.url }}'{% if not forloop.last %},{% endif %}
+    {% endfor %}
+    };
+
+    self.init = function init() {
+        var cookie_name = "lang-redir";
+        var lang = navigator.language || navigator.userLanguage;
+        short_lang = lang.split('-')[0];
+
+        if (window.location.pathname.indexOf(short_lang) == -1 && $.cookie(cookie_name) == null) {
+            // if we have this page in the users browser language
+
+            if (self.language_page_urls[short_lang] != undefined) {
+                //location_url = '/' + short_lang + window.location.pathname;
+
+                location_url = self.language_page_urls[short_lang];
+
+                if ($.cookie(cookie_name) == null) {
+                    $.cookie(cookie_name, short_lang);
+                }
+
+                window.location = location_url;
+            }
+        }
+    }
+    self.init();
 }
+
+/*enable-on-bake*lang_redir = LanguageRedirect();*/
 </script>
