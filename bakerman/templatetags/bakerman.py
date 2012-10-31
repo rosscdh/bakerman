@@ -4,7 +4,7 @@ register = template.Library()
 
 
 @register.inclusion_tag('js/page_language_urls.html')
-def document_categories_home(page):
+def js_page_language_urls(page):
 	language_list = []
 	if page:
 		for lang in page.get_languages():
